@@ -9,12 +9,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.kafka.test.config.ApplicationPropConfig;
-import com.kafka.test.config.KafkaPropConfig;
-import com.kafka.test.event.GreetingEvent;
-import com.kafka.test.listener.ListenerConfig;
-import com.kafka.test.service.MessageProducer;
+import com.kafka.test.service.config.KafkaPropConfig;
+import com.kafka.test.service.event.message.GreetingEvent;
+import com.kafka.test.service.event.listener.ListenerPool;
+import com.kafka.test.service.event.MessageProducer;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,18 +23,17 @@ import com.kafka.test.service.MessageProducer;
                                        ApplicationPropConfig.class,
                                        KafkaPropConfig.class
                                })
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.kafka.test")
 public class Application implements CommandLineRunner {
 
     private final ApplicationPropConfig config;
 
     private final MessageProducer producer;
 
-    private final ListenerConfig listenerConfig;
+    private final ListenerPool listenerPool;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Application implements CommandLineRunner {
     private void runEvent() {
         try {
             this.producer.sendGreetingMessage(new GreetingEvent("Greetings", "World New approach!"));
-            this.listenerConfig.getGreetingLatch().await(10, TimeUnit.SECONDS);
+            this.listenerPool.getGreetingLatch().await(10, TimeUnit.SECONDS);
         } catch (Exception e) {
             log.error("Error happened while running event.", e);
             throw new RuntimeException(e);

@@ -1,12 +1,12 @@
-package com.kafka.test.service;
+package com.kafka.test.service.event;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Component;
 
-import com.kafka.test.event.GreetingEvent;
-import com.kafka.test.template.GreetingKafkaTemplate;
+import com.kafka.test.service.event.message.GreetingEvent;
+import com.kafka.test.service.event.template.GreetingKafkaTemplate;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -16,6 +16,6 @@ public class MessageProducer {
     private final GreetingKafkaTemplate greetingKafkaTemplate;
 
     public void sendGreetingMessage(GreetingEvent greeting) {
-        greetingKafkaTemplate.send(GreetingEvent.EVENT_NAME, greeting);
+        this.greetingKafkaTemplate.send(GreetingEvent.EVENT_NAME, greeting);
     }
 }

@@ -1,4 +1,4 @@
-package com.kafka.test.config;
+package com.kafka.test.service.config;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +45,7 @@ public class KafkaServerConfig {
     }
 
     private void autoConfigureTopics(AdminClient adminClient) {
-        Set<BeanDefinition> annotatedKafkaEvents = this.findAnnotatedKafkaEvents("com.kafka.test.event");
+        Set<BeanDefinition> annotatedKafkaEvents = this.findAnnotatedKafkaEvents("com.kafka.test.service.event");
         annotatedKafkaEvents.forEach(b -> this.createTopic(adminClient, b));
     }
 

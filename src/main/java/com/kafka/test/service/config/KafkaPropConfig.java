@@ -1,4 +1,4 @@
-package com.kafka.test.config;
+package com.kafka.test.service.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

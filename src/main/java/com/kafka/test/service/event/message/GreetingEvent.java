@@ -1,4 +1,4 @@
-package com.kafka.test.event;
+package com.kafka.test.service.event.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

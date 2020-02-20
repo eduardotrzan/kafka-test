@@ -1,4 +1,4 @@
-package com.kafka.test.producer;
+package com.kafka.test.service.event.producer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import com.kafka.test.config.KafkaPropConfig;
+import com.kafka.test.service.config.KafkaPropConfig;
 
 abstract class AbstractKafkaProducer<T> {
 

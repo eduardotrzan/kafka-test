@@ -1,16 +1,14 @@
-package com.kafka.test.consumer;
+package com.kafka.test.service.event.consumer;
 
 import org.apache.kafka.common.serialization.Deserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.stereotype.Component;
 
-import com.kafka.test.config.KafkaPropConfig;
-import com.kafka.test.event.GreetingEvent;
+import com.kafka.test.service.config.KafkaPropConfig;
+import com.kafka.test.service.event.message.GreetingEvent;
 
 @Component
 public class GreetingConsumer extends AbstractKafkaConsumer<GreetingEvent> {
-
-    private static final String GROUP_ID = "greeting";
 
     GreetingConsumer(KafkaPropConfig kafkaPropConfig) {
         super(kafkaPropConfig);
@@ -18,7 +16,7 @@ public class GreetingConsumer extends AbstractKafkaConsumer<GreetingEvent> {
 
     @Override
     protected String getGroupId() {
-        return GROUP_ID;
+        return GreetingEvent.EVENT_NAME;
     }
 
     @Override

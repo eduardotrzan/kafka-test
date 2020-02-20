@@ -1,4 +1,4 @@
-package com.kafka.test.consumer;
+package com.kafka.test.service.event.consumer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
-import com.kafka.test.config.KafkaPropConfig;
+import com.kafka.test.service.config.KafkaPropConfig;
 
 abstract class AbstractKafkaConsumer<T> {
 

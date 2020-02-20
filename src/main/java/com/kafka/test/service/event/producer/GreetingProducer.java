@@ -1,10 +1,10 @@
-package com.kafka.test.producer;
+package com.kafka.test.service.event.producer;
 
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.stereotype.Component;
 
-import com.kafka.test.config.KafkaPropConfig;
-import com.kafka.test.event.GreetingEvent;
+import com.kafka.test.service.config.KafkaPropConfig;
+import com.kafka.test.service.event.message.GreetingEvent;
 
 @Component
 public class GreetingProducer extends AbstractKafkaProducer<GreetingEvent> {

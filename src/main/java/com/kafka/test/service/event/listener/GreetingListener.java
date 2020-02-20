@@ -1,18 +1,18 @@
-package com.kafka.test.listener;
+package com.kafka.test.service.event.listener;
 
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.stereotype.Component;
 
-import com.kafka.test.consumer.GreetingConsumer;
-import com.kafka.test.event.GreetingEvent;
+import com.kafka.test.service.event.consumer.GreetingConsumer;
+import com.kafka.test.service.event.message.GreetingEvent;
 
 @Component(value = GreetingListener.LISTENER_NAME)
 class GreetingListener extends ConcurrentKafkaListenerContainerFactory<String, GreetingEvent> {
 
     static final String LISTENER_NAME = "GreetingListener";
 
-    GreetingListener(GreetingConsumer greetingConsumer) {
+    GreetingListener(GreetingConsumer consumer) {
         super();
-        super.setConsumerFactory(greetingConsumer.getConsumerFactory());
+        super.setConsumerFactory(consumer.getConsumerFactory());
     }
 }
