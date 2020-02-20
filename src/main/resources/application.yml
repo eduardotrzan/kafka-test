@@ -1,0 +1,28 @@
+config:
+  serviceName: kafka-test
+  timeZone: America/Montreal
+
+kafka:
+  bootstrapAddress: ${bootstrapAddress}
+
+spring:
+  jackson:
+    locale: en_CA
+    date-format: yyyy-MM-dd HH:mm:ss
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+
+server:
+  port: ${serverPort}
+  servlet:
+    context-path: /kafka-test
+  tomcat:
+    basedir: ./logs
+    accesslog:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    # Hides HHH000424: Disabling contextual LOB creation as createClob() method threw error
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: WARN
