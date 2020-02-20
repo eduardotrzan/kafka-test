@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  kafka-test:
+    image: eduardotrzan/kafka-test:latest
+    build: .
+    container_name: kafka-test
+    ports:
+      - "127.0.0.1:8484:8484"
+      - "127.0.0.1:9092:9092"
+      - "127.0.0.1:2181:2181"
+    volumes:
+      - ~/Dev/Docker/logs/kafka-test:/opt/kafka-test/server/logs
+    environment:
+      # Spring running profile
+      - springProfile=local
+
+      # Application running port
+      - serverPort=8484
+
+      # JPA sql logging
+      - jpaShowSql=true

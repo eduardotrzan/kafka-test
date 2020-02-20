@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "9a94a3ad-d2c5-49ad-881d-73149acf5012",
+		"name": "kafka-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c60bc2c-52c4-4fdb-9255-a924d8688b53",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"personUuid\", jsonData.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Eduardo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/kafka-test/v1/persons",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"kafka-test",
+						"v1",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Emails for a Person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c60bc2c-52c4-4fdb-9255-a924d8688b53",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Eduardo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/kafka-test/v1/persons/{{personUuid}}/emails",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"kafka-test",
+						"v1",
+						"persons",
+						"{{personUuid}}",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
