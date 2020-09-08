@@ -14,11 +14,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(onlyExplicitlyIncluded = true)
+@ToString(of = {"bootstrapAddress", "clientId"})
 @ConfigurationProperties(prefix = "kafka")
 public class KafkaPropConfig {
 
-    @ToString.Include
     private String bootstrapAddress;
+
+    private String clientId;
 
 }

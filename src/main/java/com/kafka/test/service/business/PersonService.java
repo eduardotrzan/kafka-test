@@ -14,7 +14,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import com.kafka.test.dto.request.PersonCreateDto;
 import com.kafka.test.dto.response.PersonDto;
 import com.kafka.test.service.event.message.PersonCreatedEvent;
-import com.kafka.test.service.event.template.PersonCreatedKafkaTemplate;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ public class PersonService {
 
     private final InMemoryDb inMemoryDb;
 
-    private final PersonCreatedKafkaTemplate personCreatedKafkaTemplate;
+//    private final PersonCreatedKafkaTemplate personCreatedKafkaTemplate;
 
     public PersonDto create(PersonCreateDto personCreate) {
         PersonDto personToBeSaved = PersonDto.builder()
@@ -42,19 +41,19 @@ public class PersonService {
                 .uuid(person.getUuid())
                 .name(person.getName())
                 .build();
-        ListenableFuture<SendResult<String, PersonCreatedEvent>> send = this.personCreatedKafkaTemplate
-                .send(PersonCreatedEvent.EVENT_NAME, event);
-        send.addCallback(new ListenableFutureCallback<>() {
-            @Override
-            public void onFailure(Throwable throwable) {
-                log.error("Failed to issue event={} for person={}", event, person, throwable);
-            }
-
-            @Override
-            public void onSuccess(SendResult<String, PersonCreatedEvent> result) {
-                log.info("Succeeded in issue event={} for person={} with result={}", event, person, result);
-            }
-        });
+//        ListenableFuture<SendResult<String, PersonCreatedEvent>> send = this.personCreatedKafkaTemplate
+//                .send(PersonCreatedEvent.TOPIC, event);
+//        send.addCallback(new ListenableFutureCallback<>() {
+//            @Override
+//            public void onFailure(Throwable throwable) {
+//                log.error("Failed to issue event={} for person={}", event, person, throwable);
+//            }
+//
+//            @Override
+//            public void onSuccess(SendResult<String, PersonCreatedEvent> result) {
+//                log.info("Succeeded in issue event={} for person={} with result={}", event, person, result);
+//            }
+//        });
     }
 
 }

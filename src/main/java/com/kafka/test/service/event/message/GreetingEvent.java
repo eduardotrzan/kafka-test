@@ -6,17 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.kafka.test.annotation.KafkaEvent;
+import com.kafka.test.annotation.GenericKafkaEvent;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(of = { "msg", "name" })
-@KafkaEvent(topic = GreetingEvent.EVENT_NAME)
+@GenericKafkaEvent(topic = GreetingEvent.TOPIC,
+                   producerName = GreetingEvent.PRODUCER_NAME,
+                   templateName = GreetingEvent.TEMPLATE_NAME)
 public class GreetingEvent {
 
-    public static final String EVENT_NAME = "greeting";
+    public static final String TOPIC = "greeting.created.event";
+    public static final String CONSUMER_GROUP_ID = "PersonGreetingEvent";
+    public static final String CONSUMER_NAME = "PersonGreetingEventConsumer";
+    public static final String PRODUCER_NAME = "PersonGreetingEventProducer";
+    public static final String TEMPLATE_NAME = "PersonGreetingEventTemplate";
 
     private String msg;
     private String name;

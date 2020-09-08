@@ -3,3 +3,4 @@ server:
 
 kafka:
   bootstrapAddress: localhost:9092
+  clientId: topics

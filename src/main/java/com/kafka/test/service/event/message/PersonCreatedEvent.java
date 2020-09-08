@@ -9,7 +9,7 @@ import lombok.ToString;
 
 import java.util.UUID;
 
-import com.kafka.test.annotation.KafkaEvent;
+import com.kafka.test.annotation.GenericKafkaEvent;
 
 @Builder
 @Getter
@@ -17,10 +17,16 @@ import com.kafka.test.annotation.KafkaEvent;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(of = { "uuid", "name" })
-@KafkaEvent(topic = PersonCreatedEvent.EVENT_NAME)
+@GenericKafkaEvent(topic = PersonCreatedEvent.TOPIC,
+                   producerName = PersonCreatedEvent.PRODUCER_NAME,
+                   templateName = PersonCreatedEvent.TEMPLATE_NAME)
 public class PersonCreatedEvent {
 
-    public static final String EVENT_NAME = "person.created.event";
+    public static final String TOPIC = "person.created.event";
+    public static final String CONSUMER_GROUP_ID = "PersonCreatedEvent";
+    public static final String CONSUMER_NAME = "PersonCreatedEventConsumer";
+    public static final String PRODUCER_NAME = "PersonCreatedEventProducer";
+    public static final String TEMPLATE_NAME = "PersonCreatedEvenTemplate";
 
     private UUID uuid;
 
